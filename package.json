@@ -1,0 +1,23 @@
+{
+  "name": "markdown-it-ultree",
+  "version": "0.1.0",
+  "description": "Generate collapsible trees from text",
+  "main": "./src/markdown-it-ultree.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [
+    "markdown tree",
+    "markdown-it",
+    "markdown-it-ultree",
+    "plugin",
+    "ultree",
+    "tree"
+  ],
+  "author": "utpalb",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "markdown-it": "^14.1.0"
+  }
+}
