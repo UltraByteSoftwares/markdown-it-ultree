@@ -1,6 +1,6 @@
 # About
 
-A plugin for [markdown-it](https://github.com/markdown-it/markdown-it) to render nested tree structures in markdown.
+A plugin for [markdown-it](https://github.com/markdown-it/markdown-it) to render nested tree structures in markdown. The tree is implemented as an unordered-list i.e. `<ul>` HTML element.
 
 # Installation
 
