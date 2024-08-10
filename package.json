@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-ultree",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Generate collapsible trees from text",
   "main": "./src/markdown-it-ultree.js",
   "scripts": {
