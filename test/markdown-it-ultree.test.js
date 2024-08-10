@@ -7,6 +7,7 @@ test("ULTree-simple", () => {
 const input = 
 `
 \`\`\`ultree
+    output: simple
     lorem
         ipsum
             sit
@@ -73,3 +74,24 @@ test('ULTree-simple: no ultree', () => {
 
     expect(output).toEqual(ref);
 });
+
+test('IndentParser-tree-default', () => {
+    const input = 
+`
+\`\`\`ultree
+    lorem
+    ├── ipsum
+    │   ├── sit
+    │   └── amet
+    └── consectetur
+        └── adipiscing
+\`\`\`
+`;
+
+    const ref = 
+    `<div class="ultree"><ul><li><details open><summary>lorem</summary><ul><li><details open><summary>ipsum</summary><ul><li>sit</li><li>amet</li></ul></details></li><li><details open><summary>consectetur</summary><ul><li>adipiscing</li></ul></details></li></ul></details></li></ul></div>`
+
+    const output = md.render(input);
+
+    expect(output).toEqual(ref);
+})

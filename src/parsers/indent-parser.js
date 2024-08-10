@@ -2,6 +2,16 @@ class IndentParser {
     constructor() {
         this.defaultPadding = 4;
     }
+
+    /**
+     * 
+     * @param {string} text 
+     * @returns {string}
+     */
+    static replaceBranchChars(text) {
+        return text.replace(/[│└├─]/g, ' ');
+    }
+
     /**
      * 
      * @param {string} text 
@@ -81,6 +91,10 @@ class IndentParser {
         // Check for empty string
         if (text.trim() === '')
             return null;
+
+        // Replace branch special characters output by 
+        // the linux tree command, if any
+        text = IndentParser.replaceBranchChars(text);
 
         // Reset the lineNum
         this._lineNum = 0;
