@@ -1,9 +1,21 @@
 class FoldableUL {
-    static _getItem(item, ulMap) {
+    /**
+     * 
+     * @param {Object} item 
+     * @param {Object} ulMap 
+     * @param {Object | null} opts 
+     * @returns 
+     */
+    static _getItem(item, ulMap, opts = null) {
         let str = '<li>';
         let hasChildren = item.children && item.children.length ? true: false;
 
-        str += hasChildren ? '<details open><summary>' : ''; 
+        let openStr = ' open';
+        if (opts) {
+            openStr = opts.open === false ? '': openStr;
+        }
+
+        str += hasChildren ? `<details${openStr}><summary>` : ''; 
         str += `${item.text}`;
         str += hasChildren ? '</summary>' : '';
 
@@ -28,10 +40,10 @@ class FoldableUL {
      * 
      * @param {Object} ulMap 
      */
-    generate(ulMap) {
+    generate(ulMap, opts = {open: true}) {
         // Get the root
         const root = ulMap[0];
-        return `<ul>${FoldableUL._getItem(root, ulMap)}</ul>`
+        return `<ul>${FoldableUL._getItem(root, ulMap, opts)}</ul>`
     }
 }
 

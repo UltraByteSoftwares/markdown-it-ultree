@@ -25,9 +25,10 @@ class SimpleUL {
     }
     /**
      * 
-     * @param {Object} ulMap 
+     * @param {Object} ulMap
+     * @param {Object} opts Additional options 
      */
-    generate(ulMap) {
+    generate(ulMap, opts = null) {
         // Get the root
         const root = ulMap[0];
         return `<ul>${SimpleUL._getItem(root, ulMap)}</ul>`

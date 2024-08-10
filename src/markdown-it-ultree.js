@@ -2,9 +2,13 @@ const ParserMgr = require('./parser-mgr.js');
 const FormatterMgr = require('./formatter-mgr.js');
 
 const defaults = {
-    'input': 'indent',
-    'output': 'foldable'
+    'input' : 'indent',
+    'output': 'foldable',
+    'open'  : 'true'
 }
+
+// Initialize with default options
+const options = {...defaults};
 
 /**
  * Gets the options and also returns a string with options removed
@@ -27,8 +31,6 @@ function preProcessContent(text) {
 
     let lineNum = 0
     const regexp = /(\w+\s*:\s*\w+)/g;
-    // Initialize with default options
-    let options = {...defaults};
 
     // Loop over lines for presence of options
     for (let line of lines) {
@@ -68,6 +70,18 @@ function preProcessContent(text) {
     
 }
 
+/**
+ * Returns formatter specific options
+ * @returns {Object}
+ */
+function getFormatterOptions() {
+    const opts = {};
+    if (options['open'] === 'false')
+        opts['open'] = false;
+
+    return opts;
+}
+
 function ulTreePlugin(md) {
     const origRule = md.renderer.rules.fence.bind(md.renderer.rules);
     md.renderer.rules.fence = (tokens, idx, options, env, slf) => {
@@ -82,7 +96,10 @@ function ulTreePlugin(md) {
                 const {content, parser, formatter} = ret;
                 const ulMap = parser.parse(content);
                 if (ulMap) {
-                    const htmlCode = formatter.generate(ulMap);
+                    // Get the formatter specific options
+                    const opts = getFormatterOptions();
+
+                    const htmlCode = formatter.generate(ulMap, opts);
                     return `<div class="ultree">${htmlCode}</div>`;
                 }
             }
