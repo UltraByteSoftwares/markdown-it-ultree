@@ -1,6 +1,6 @@
 # About
 
-A plugin for [markdown-it](https://github.com/markdown-it/markdown-it) to render nested tree structures in markdown. The tree is implemented as an unordered-list i.e. `<ul>` HTML element.
+A markdown tree plugin for [markdown-it](https://github.com/markdown-it/markdown-it) parser to render collapsible (foldable) trees. The tree is rendered as an unordered-list HTML element.
 
 # Installation
 
@@ -11,49 +11,97 @@ npm install markdown-it-ultree
 # Usage
 
 ```js
-// Install `markdown-it` if you do not have it
+// If you don't have markdown-it, install it
 const markdownIt = require('markdown-it');
 const ultree = require('markdown-it-ultree');
 const mdit = markdownIt();
 mdit.use(ultree);
-const output = mdit.render(`\`\`\`ultree
+
+/* You can use spaces or tabs (but not both simultaneously)
+* to indent items
+*/  
+mdit.render(`\`\`\`ultree
 output: foldable
 
-    Dir1
-        Dir2
-            File1
-            File2
-        File4
+.
+    LICENSE
+    package.json
+    package-lock.json
+    README.md
+    src
+        markdown-it-ultree.js
+    test
+        markdown-it-ultree.test.js
 
 \`\`\``);
 
-console.log(output);
+// or you can paste the output of the "tree" command as well
+mdit.render(`\`\`\`ultree
+output: foldable
+
+.
+├── LICENSE
+├── package.json
+├── package-lock.json
+├── README.md
+├── src
+│   ├── markdown-it-ultree.js
+└── test
+    └── markdown-it-ultree.test.js
+
+\`\`\``);
 ```
 
 ## Output
 
-### Raw text
+### Raw output (prettified)
 
 ```html
-<div class="ultree"><ul><li><details open><summary>Dir1</summary><ul><li><details open><summary>Dir2</summary><ul><li>File1</li><li>File2</li></ul></details></li><li>File4</li></ul></details></li></ul></div>
+<div class="ultree">
+    <ul>
+        <li><details open><summary>.</summary>
+                <ul>
+                    <li>LICENSE</li>
+                    <li>package.json</li>
+                    <li>package-lock.json</li>
+                    <li>README.md</li>
+                    <li><details open><summary>src</summary>
+                            <ul>
+                                <li>markdown-it-ultree.js</li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li><details open><summary>test</summary>
+                            <ul>
+                                <li>markdown-it-ultree.test.js</li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+            </details>
+        </li>
+    </ul>
+</div>
 ```
 
 ### HTML output with styling
 
 ![foldable-tree](./res/example-foldable.png)
 
-**NOTE**: This repo does not come with the CSS for the image shown above.
+**NOTE**: The CSS for the above image can be found in [style](./style/style.css) folder.
 
 # Options
 
-Options are specified at the beginning of the `ultree` block.
+Options can be specified as `key: value` pairs at the beginning of the body of `ultree` block as shown in the example above.
 
-It is not mandatory to specify any options.
+Here are the currently supported options,
 
-| Option     | Possible values | Description                      |
-| ---------- | --------------- | -------------------------------- |
-| **output** | `foldable`      | (default) Output a foldable tree |
-|            | `simple`        | Output a non-foldable tree       |
+| Option     | Possible values | Description                                        |
+| ---------- | --------------- | -------------------------------------------------- |
+| **output** | `foldable`      | (default) Output a foldable tree                   |
+|            | `simple`        | Output a non-foldable tree                         |
+| **open**   | `true`          | (default) Keep foldable tree expanded at the start |
+|            | `false`         | Keep foldable tree collapsed at the start          |
 
 # Important
 

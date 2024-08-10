@@ -1,0 +1,41 @@
+.ultree {
+    --lineheight: 1rem;
+    --branchthickness: 2px;
+}
+
+.ultree ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.ultree li {
+    position: relative;
+    border: 0 solid transparent;
+}
+
+.ultree li li {
+    border-left: var(--branchthickness) solid gray;
+    padding-left: calc(var(--lineheight) * 2);
+    margin-left: calc(var(--lineheight) * 0.25);
+}
+
+.ultree li li:last-child {
+    border-left: var(--branchthickness) solid transparent;
+}
+
+.ultree li li::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(var(--lineheight) * -0.125);
+    left: calc(var(--branchthickness) * -1);
+    height: var(--lineheight);
+    width: var(--lineheight);
+    border: solid gray;
+    border-width: 0 0 var(--branchthickness) var(--branchthickness);
+}
+
+.ultree summary {
+    cursor: pointer;
+}
