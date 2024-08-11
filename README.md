@@ -108,3 +108,7 @@ Here are the currently supported options,
 - The tree can have only **one** root.
 - Do not mix tabs and spaces for indentation within one `ultree` block. Either use spaces (recommended) or tabs.
 - Keep the indentation consistent. e.g. if you indent by 4 spaces, do not indent by 2 spaces later on within the same `ultree` block.
+
+# Related
+
+A Visual Studio Code extension utilizing this plugin can be downloaded from [Visual Studio Code marketplace](https://marketplace.visualstudio.com/items?itemName=UltraByteSoftwares.markdown-tree) and the repo can be found at [VSCode Markdown Tree](https://github.com/UltraByteSoftwares/vscode-markdown-tree).
